@@ -23,10 +23,10 @@ public class FeatureCollectionTest {
 				System.out.println("it is a featureCollection !");
 				String dirPath = featureCollectionFile.getAbsoluteFile().getParentFile().getAbsolutePath();
 				System.out.println("Create FeatureCollection from geoJSONFile : ");
-				FeatureCollection<SimpleFeatureType, SimpleFeature> newFeatureCollection = GeoJsonFileUtils.GeoJsonToFeatureCollection(featureCollectionFile);
+				FeatureCollection<SimpleFeatureType, SimpleFeature> newFeatureCollection = GeoJsonFileUtils.geoJsonToFeatureCollection(featureCollectionFile);
 				GeoJsonFileUtils.displayFeatureCollection(newFeatureCollection);
 				System.out.println("Create geoJSONFile from FeatureCollection : ");
-				GeoJsonFileUtils.FeatureCollectionToGeoJsonFile(newFeatureCollection, dirPath);
+				GeoJsonFileUtils.featureCollectionToGeoJsonFile(newFeatureCollection, dirPath);
 				System.out.println("Voir le fichier --> "+dirPath+File.separator+"outputFeatureCollection.json");
 			} else {
 				System.out.println("it is not a featureCollection !");

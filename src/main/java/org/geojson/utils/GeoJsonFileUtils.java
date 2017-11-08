@@ -32,7 +32,7 @@ public class GeoJsonFileUtils {
 	private static GeometryJSON geometryJSON;
 	private static FeatureJSON featureJSON;
 
-	private static String GeoJsonToString(File jsonFile) throws FileNotFoundException, IOException, ParseException {
+	private static String geoJsonToString(File jsonFile) throws FileNotFoundException, IOException, ParseException {
 
 		JSONParser jsonParser = new JSONParser();
 		String data = jsonParser.parse(new FileReader(jsonFile)).toString();
@@ -43,7 +43,7 @@ public class GeoJsonFileUtils {
 	public static boolean isFeatureCollectionData(File jsonFile) throws FileNotFoundException, IOException {
 
 		try {
-			String data = GeoJsonToString(jsonFile);
+			String data = geoJsonToString(jsonFile);
 			JSONObject jsonData = new JSONObject(data);
 			return jsonData.get("type").equals("FeatureCollection");
 		} catch (ParseException e) {
@@ -57,7 +57,7 @@ public class GeoJsonFileUtils {
 	public static boolean isGeometryData(File jsonFile) throws FileNotFoundException, IOException {
 
 		try {
-			String data = GeoJsonToString(jsonFile);
+			String data = geoJsonToString(jsonFile);
 			JSONObject jsonData = new JSONObject(data);
 			String type = jsonData.get("type").toString();
 			return type.matches(POINT + "|" + MULTIPOINT + "|" + LINESTRING + "|" + MULTILINESTRING + "|" + POLYGON
@@ -70,17 +70,17 @@ public class GeoJsonFileUtils {
 
 	}
 
-	public static void GeometryToGeoJsonFile(Geometry geometry, String path) throws FileNotFoundException, IOException {
+	public static void geometryToGeoJsonFile(Geometry geometry, String path) throws FileNotFoundException, IOException {
 		geometryJSON = new GeometryJSON();
 		geometryJSON.write(geometry, new FileOutputStream(path + File.separator + "outputGeometry.json"));
 	}
 
-	public static Geometry GeoJsonToGeometry(File geometryFile) throws FileNotFoundException, IOException {
+	public static Geometry geoJsonToGeometry(File geometryFile) throws FileNotFoundException, IOException {
 		geometryJSON = new GeometryJSON();
 		return geometryJSON.read(new FileInputStream(geometryFile));
 	}
 
-	public static void FeatureCollectionToGeoJsonFile(
+	public static void featureCollectionToGeoJsonFile(
 			FeatureCollection<SimpleFeatureType, SimpleFeature> featureCollection, String path)
 			throws FileNotFoundException, IOException {
 		featureJSON = new FeatureJSON();
@@ -88,7 +88,7 @@ public class GeoJsonFileUtils {
 				new FileOutputStream(new File(path + File.separator + "outputFeatureCollection.json")));
 	}
 
-	public static FeatureCollection<SimpleFeatureType, SimpleFeature> GeoJsonToFeatureCollection(
+	public static FeatureCollection<SimpleFeatureType, SimpleFeature> geoJsonToFeatureCollection(
 			File featureCollectionFile) throws FileNotFoundException, IOException {
 		featureJSON = new FeatureJSON();
 		return featureJSON.readFeatureCollection(new FileInputStream(featureCollectionFile));

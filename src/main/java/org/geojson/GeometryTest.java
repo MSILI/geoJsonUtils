@@ -22,10 +22,10 @@ public class GeometryTest {
 				System.out.println("it is a Geometrie !");
 				String dirPath = geometryFile.getAbsoluteFile().getParentFile().getAbsolutePath();
 				System.out.println("Create geometry from geoJSONFile : ");
-				Geometry geometry =  GeoJsonFileUtils.GeoJsonToGeometry(geometryFile);
+				Geometry geometry =  GeoJsonFileUtils.geoJsonToGeometry(geometryFile);
 				System.out.println(geometry);
 				System.out.println("Create geoJSONFile from geometry : ");
-				GeoJsonFileUtils.GeometryToGeoJsonFile(geometry, dirPath);
+				GeoJsonFileUtils.geometryToGeoJsonFile(geometry, dirPath);
 				System.out.println("Voir le fichier --> "+dirPath+File.separator+"outputGeometry.json");
 			} else {
 				System.out.println("it is not a geomety !");
